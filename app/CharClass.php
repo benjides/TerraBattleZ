@@ -2,12 +2,13 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Race extends Model {
-	protected $table = "races";
+class CharClass extends Model {
+	protected $table = "char_classes";
 	protected $fillable = [
-		'race',
+		'class',
+		'order_key',
 	];
-	protected $hidden = ['id'];
+	protected $hidden = ['id','order_key'];
 
 	public function characters()
   {

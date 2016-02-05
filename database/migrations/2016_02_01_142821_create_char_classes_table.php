@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAffectionsTable extends Migration {
+class CreateCharClassesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class CreateAffectionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('affections', function(Blueprint $table)
+		Schema::create('char_classes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->timestamps();
+			$table->integer('order_key')->unsigned();
+			$table->string('class',2)->unique();
 		});
 	}
 
@@ -26,7 +27,7 @@ class CreateAffectionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('affections');
+		Schema::drop('char_classes');
 	}
 
 }

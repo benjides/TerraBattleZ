@@ -25,7 +25,7 @@ class CreateJobSkillsTable extends Migration {
 		Schema::table('job_skills', function(Blueprint $table) {
       $table->foreign('job_id')->references('id')->on('jobs');
 			$table->foreign('skill_name')->references('name')->on('skills');
-			//$table->foreign('affection')->references('name')->on('affections');
+			$table->foreign('affection')->references('affection')->on('affections');
     });
 	}
 

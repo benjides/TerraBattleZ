@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Character;
 use App\Iteration;
+use App\Race;
 use App\Job;
 use App\Item;
 use App\Skill;
@@ -24,12 +25,13 @@ class CharacterSeeder extends Seeder {
 		{
 			$name = $faker->shuffle($faker->word());
 			$recodeID = $faker->boolean(50) ? rand (0,$i) : NULL ;
+			$race = Race::orderByRaw("RAND()")->first();
 			Character::create(
 				[
 					'name'=>$name,
           'savename'=>$name,
 					'class'=>$faker->randomElement($array = array ('A','B','C','D','S','SS','Z')),
-          'race'=>$faker->boolean(50),
+          'race'=> $race->race,
           'pot'=>$faker->boolean(50),
           'pof'=>$faker->boolean(50),
           'adventurer'=>$faker->boolean(50),
@@ -57,19 +59,18 @@ class CharacterSeeder extends Seeder {
 					]
 				);
 				for ($s=1; $s < 5 ; $s++) {
-					$skillcount = Skill::all()->count();
-					$skill = Skill::where('id', rand(0, $skillcount-1))->first();
+					$skill = Skill::orderByRaw("RAND()")->first();
+					$affection = Affection::orderByRaw("RAND()")->first();
 					JobSkill::create(
 						[
 							'lvl' => rand(0,15*$s),
 							'skill_name' => $skill->name,
-							'affection'=> $faker->word(),
+							'affection'=> $affection->affection,
 							'frequency' => rand(0,101),
 							'job_id' => $t*$i,
 						]
 					);
-					$itemcount = Item::all()->count();
-					$item = Item::where('id', rand(0, $itemcount-1))->first();
+					$item = Item::orderByRaw("RAND()")->first();;
 					JobItem::create(
 						[
 							'quantity' => rand(0,51),
@@ -81,7 +82,7 @@ class CharacterSeeder extends Seeder {
 
 			}
 
-			for ($j=0; $j < rand(1,5) ; $j++) {
+			for ($j=0; $j < rand(1,8) ; $j++) {
 				Iteration::create(
 				[
 					'trigger'=> $faker->word(),

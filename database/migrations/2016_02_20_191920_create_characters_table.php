@@ -29,6 +29,8 @@ class CreateCharactersTable extends Migration {
 
 		Schema::table('characters', function(Blueprint $table) {
 			//$table->foreign('recode_id')->references('id')->on('characters');
+			$table->foreign('race')->references('race')->on('races');
+			$table->foreign('class')->references('class')->on('char_classes');
     });
 	}
 
