@@ -8,7 +8,7 @@ class Race extends Model {
 		'race',
 	];
 	protected $hidden = ['id'];
-
+	public $timestamps = false;
 	public function characters()
   {
     return $this->belongsToMany('App\Character');

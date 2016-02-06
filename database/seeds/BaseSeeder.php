@@ -46,10 +46,10 @@ class BaseSeeder extends Seeder {
 		Race::insert($data);
 
 		$faker = Faker::create();
-		for ($i=0; $i < 200 ; $i++) {
+		for ($i=0; $i < 50 ; $i++) {
 			Affection::create(
 				[
-					"affection" =>  $faker->shuffle($faker->word()),
+					"affection" =>  $faker->shuffle($faker->name()),
 				]
 			);
 		}

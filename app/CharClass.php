@@ -9,6 +9,7 @@ class CharClass extends Model {
 		'order_key',
 	];
 	protected $hidden = ['id','order_key'];
+	public $timestamps = false;
 
 	public function characters()
   {

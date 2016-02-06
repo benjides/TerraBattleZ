@@ -8,7 +8,7 @@ class Affection extends Model {
 		'affection',
 	];
 	protected $hidden = ['id'];
-
+	public $timestamps = false;
 	public function skills()
   {
     return $this->belongsToMany('App\JobSkill');

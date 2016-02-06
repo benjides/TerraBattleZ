@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Character;
+use App\CharClass;
 
 use Illuminate\Http\Request;
 
@@ -17,8 +18,14 @@ class CharacterController extends Controller {
 	 */
 	public function index()
 	{
-		$characters = Character::orderBy('class', 'desc')->orderBy('name', 'asc')->get();
-		return view('rooster' , ['characters' => $characters ]);
+		$classes = CharClass::orderBy('order_key','desc')->get();
+		foreach ($classes as $class) {
+			$characters[$class->class] = Character::where('class','=',$class->class)
+																							->where('adventurer','=',true)
+																							->orderBy('name','asc')
+																							->get();
+		}
+		return view('rooster' , ['classes' => $characters ]);
 	}
 
 	/**

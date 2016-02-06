@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Character;
 use App\Iteration;
+use App\Affection;
 use App\Race;
 use App\Job;
 use App\Item;
@@ -23,7 +24,7 @@ class CharacterSeeder extends Seeder {
 		$faker = Faker::create();
 		for ($i=1; $i<200; $i++)
 		{
-			$name = $faker->shuffle($faker->word());
+			$name = $faker->shuffle($faker->word()).$faker->shuffle($faker->word());
 			$recodeID = $faker->boolean(50) ? rand (0,$i) : NULL ;
 			$race = Race::orderByRaw("RAND()")->first();
 			Character::create(
