@@ -7,7 +7,7 @@ Terra Battle Z is a complete Database about the Mistwalker's mobile game Terra B
 
 - [Installation](#installation)
 - [Contributing](#contributing)
-- [Dependencies](#dependiencies)
+- [Dependencies](#dependencies)
 - [License](#license)
 
 ## Installation
