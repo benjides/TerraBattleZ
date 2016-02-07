@@ -1,5 +1,7 @@
 # Terra Battle Z
 
+(PROJECT STILL IN BETA SOME PARTS MAY NOT EXIST / WORK)
+
 Terra Battle Z is a complete Database about the Mistwalker's mobile game Terra Battle. Here you can find all the source code for the last update on the WebApp.
 
 
@@ -16,7 +18,8 @@ Clone the repository to your local machine and run.
   composer install
 ```
 Change the ```.env``` file attributes to match your local database credentials.
-Then don't forget to seed the database with the last data by running.
+Create the ```terrabattlez``` database.
+Then don't forget to seed the database with the lastest data by running.
 ```sh
   php artisan migrate --seed
 ```
@@ -32,7 +35,7 @@ Before making any pull request make sure:
 For any minor changes or requests use:
 * The dedicated forum thread. [Link](#)
 * GitHub issues' tracker. [Link](https://github.com/benjides/terrabattlez/issues)
-* Twitter official account. [Link](twitter.com/terrabattlez)
+* Twitter official account. [Link](https://twitter.com/TerraBattleZ)
 * Mail account. [Link](mailto:zterrabattle@gmail.com)
 
 Thanks for your collaboration. Without you this would be nothing.
@@ -42,6 +45,7 @@ Thanks for your collaboration. Without you this would be nothing.
  - [Laravel](https://laravel.com/)
  - [Bootstrap](http://getbootstrap.com/)
  - [Composer](https://getcomposer.org/)
+ - [OpenShift](https://openshift.redhat.com/)
 
 ## License
 TerraBattleZ is released under the MIT Licence.

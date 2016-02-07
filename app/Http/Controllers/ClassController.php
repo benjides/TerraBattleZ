@@ -46,9 +46,11 @@ class ClassController extends Controller {
 	 */
 	public function show($class)
 	{
-		return $characters = Character::where('class', $class)
-	               ->orderBy('name', 'asc')
-	               ->get();
+		$characters[$class] = Character::where('class','=',$class)
+						 											  ->where('adventurer','=',true)
+						 												->orderBy('name','asc')
+						 												->get();
+		return view('rooster' , ['classes' => $characters ]);
 	}
 
 	/**
