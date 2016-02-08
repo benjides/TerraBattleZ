@@ -13,7 +13,7 @@
       <h1>Characters</h1>
       <p>
         These are the Characters that you can get in Terra Battle.
-        Characters can have a class of SS, S, A, or B. SS is the strongest character class and B is the weakest character class.
+        Characters can have a class of Z, SS, S, A, or B. SS is the strongest character class and B is the weakest character class.
       </p>
     </div>
     @foreach ($classes as $class)
