@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    $news = App\News::orderBy('date','desc')->take(10)->get();
+    return view('index' , ['news' => $news]);
 });
 
 Route::resource('characters', 'CharacterController');
