@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,12 +14,23 @@ Route::get('/', function () {
     $news = App\News::orderBy('date','desc')->take(10)->get();
     return view('index' , ['news' => $news]);
 });
-
 Route::resource('characters', 'CharacterController');
 Route::resource('class', 'ClassController');
 
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+/*
+  Admin Routes
+*/
+Route::get('admin/login', 'Auth\AuthController@getLogin');
+Route::post('admin/login', 'Auth\AuthController@postLogin');
+Route::get('admin/logout', 'Auth\AuthController@getLogout');
+
+Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
+    Route::get('/', function() {
+        return view('admin.dashboard');
+    });
+    Route::group(['middleware' => 'admin'], function() {
+      Route::resource('users', 'UserController');
+      Route::resource('news', 'NewsController');
+    });
+});

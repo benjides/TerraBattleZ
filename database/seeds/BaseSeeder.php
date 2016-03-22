@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use App\Affection;
 use App\CharClass;
 use App\Race;
+use App\User;
 use Faker\Factory as Faker;
 
 class BaseSeeder extends Seeder {
@@ -16,6 +17,11 @@ class BaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+		User::create([
+    	'username' => 'root',
+			'admin'    => true,
+    	'password' => bcrypt('root'),
+    ]);
 		$faker = Faker::create();
 
 		$data = array(

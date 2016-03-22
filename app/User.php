@@ -22,13 +22,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username', 'password'];
+	protected $fillable = ['username','admin', 'password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = ['admin','password', 'remember_token','created_at','updated_at'];
+
+	public function isAdmin()
+	{
+		return $this->admin;
+	}
 
 }
