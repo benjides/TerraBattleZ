@@ -33,4 +33,10 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
       Route::resource('users', 'UserController');
       Route::resource('news', 'NewsController');
     });
+
+    /*
+    * Skills Routes
+    */
+    Route::resource('affections', 'AffectionController');
+
 });

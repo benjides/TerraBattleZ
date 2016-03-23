@@ -94,10 +94,10 @@
                                     <a href="{{ url('/admin/characters') }}">Characters</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('/admin/characters/race') }}">Race</a>
+                                    <a href="{{ url('/admin/races') }}">Race</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('/admin/characters/add') }}">Class</a>
+                                    <a href="{{ url('/admin/classes') }}">Class</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -112,7 +112,7 @@
                                     <a href="{{ url('/admin/skills') }}">Skills</a>
                                 </li>
                                 <li>
-                                    <a href="{{ url('/admin/skills/affections') }}">Affections</a>
+                                    <a href="{{ url('/admin/affections') }}">Affections</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

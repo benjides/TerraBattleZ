@@ -8,6 +8,9 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             Users <small>Complete List</small>
+            <a href="{{url('/admin/users/create')}}" class="btn btn-default pull-right">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+            </a>
         </h1>
         <ol class="breadcrumb">
             <li>

@@ -1,57 +1,41 @@
 @extends('layouts.admin')
 
-@section('title', 'News - Update')
+@section('title', 'Affections - Create')
 
 @section('content')
 
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            News <small>Update</small>
+            Affections <small>Form Creation</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{url('admin')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="{{url('admin/news')}}">News</a>
+                <a href="{{url('admin/affections')}}">Affections</a>
             </li>
             <li class="active">
-                 Update
+                 Create
             </li>
         </ol>
     </div>
 </div>
 
-<form class="form-horizontal" action="{{url('admin/news',$news->id)}}" method="POST">
+<form class="form-horizontal" action="{{url('admin/affections')}}" method="POST">
   <fieldset>
 
       <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-      <input type="hidden" name="_method" value="PUT">
 
       <!-- Text input-->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="contents">Contents</label>
+        <label class="col-md-4 control-label" for="contents">Name</label>
         <div class="col-md-5">
-        <textarea id="contents" name="contents" placeholder="Contents" class="form-control input-md">{{$news->contents}}</textarea>
-
+          <input id="affection" name="affection" placeholder="Affection" class="form-control input-md" required="" type="text" value="{{old('affection')}}">
         </div>
       </div>
 
-      <!-- Multiple Radios (inline) -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="radios">Update date :</label>
-        <div class="col-md-4">
-          <label class="radio-inline" for="radios-0">
-            <input name="date" value="yes" type="radio">
-            Yes
-          </label>
-          <label class="radio-inline" for="radios-1">
-            <input name="date" value="no" type="radio" checked="checked">
-            No
-          </label>
-        </div>
-      </div>
 
       <!-- Button -->
       <div class="form-group">
@@ -74,7 +58,7 @@
 
 @if (Session::has('success'))
 <div class="alert alert-success" role="alert">
-  The News has been updated succesfully.
+  The affection <strong>{{Session::get('success')}}</strong> has been registered succesfully.
 </div>
 @endif
 
