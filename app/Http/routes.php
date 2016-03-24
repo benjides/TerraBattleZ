@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('index' , ['news' => $news]);
 });
 Route::resource('characters', 'CharacterController');
-Route::resource('class', 'ClassController');
-
 
 /*
   Admin Routes
@@ -33,6 +31,12 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
       Route::resource('users', 'UserController');
       Route::resource('news', 'NewsController');
     });
+
+    /*
+    * Characters Routes
+    */
+    Route::resource('class', 'ClassController');
+    Route::resource('races', 'RaceController');
 
     /*
     * Skills Routes

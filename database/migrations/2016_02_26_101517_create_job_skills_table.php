@@ -23,9 +23,18 @@ class CreateJobSkillsTable extends Migration {
 			$table->timestamps();
 		});
 		Schema::table('job_skills', function(Blueprint $table) {
-      $table->foreign('job_id')->references('id')->on('jobs');
-			$table->foreign('skill_name')->references('name')->on('skills');
-			$table->foreign('affection')->references('affection')->on('affections');
+      $table->foreign('job_id')
+						->references('id')->on('jobs')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+			$table->foreign('skill_name')
+						->references('name')->on('skills')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+			$table->foreign('affection')
+						->references('affection')->on('affections')
+						->onDelete('cascade')
+						->onUpdate('cascade');
     });
 	}
 

@@ -23,14 +23,19 @@ class CreateCharactersTable extends Migration {
 			$table->boolean('pof');
 			$table->string('race');
 			$table->boolean('adventurer');
-			$table->integer('recode_id')->nullable()->unsigned();
 			$table->timestamps();
 		});
 
 		Schema::table('characters', function(Blueprint $table) {
-			//$table->foreign('recode_id')->references('id')->on('characters');
-			$table->foreign('race')->references('race')->on('races');
-			$table->foreign('class')->references('class')->on('char_classes');
+			$table->foreign('race')
+						->references('race')->on('races')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+			$table->foreign('class')
+						->references('class')
+						->on('char_classes')
+						->onDelete('cascade')
+						->onUpdate('cascade');
     });
 	}
 

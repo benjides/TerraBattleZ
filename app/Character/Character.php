@@ -11,8 +11,7 @@ class Character extends Model {
     'race',
     'pot',
     'pof',
-    'adventurer',
-    'recode_id'
+    'adventurer'
   ];
   protected $hidden = ['id','created_at','updated_at','recode_id'];
 

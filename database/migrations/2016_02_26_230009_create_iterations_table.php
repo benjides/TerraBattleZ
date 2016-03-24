@@ -23,8 +23,14 @@ class CreateIterationsTable extends Migration {
 		});
 
 		Schema::table('iterations', function(Blueprint $table) {
-			$table->foreign('character_id')->references('id')->on('characters');
-			$table->foreign('trigger_id')->references('id')->on('characters');
+			$table->foreign('character_id')
+						->references('id')->on('characters')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+			$table->foreign('trigger_id')
+						->references('id')->on('characters')
+						->onDelete('cascade')
+						->onUpdate('cascade');
     });
 	}
 

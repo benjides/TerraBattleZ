@@ -21,8 +21,14 @@ class CreateJobItemsTable extends Migration {
 			$table->timestamps();
 		});
 		Schema::table('job_items', function(Blueprint $table) {
-      $table->foreign('job_id')->references('id')->on('jobs');
-			$table->foreign('item_name')->references('name')->on('items');
+      $table->foreign('job_id')
+						->references('id')->on('jobs')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+			$table->foreign('item_name')
+						->references('name')->on('items')
+						->onDelete('cascade')
+						->onUpdate('cascade');
     });
 	}
 

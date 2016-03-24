@@ -35,7 +35,10 @@ class CreateJobsTable extends Migration {
 		});
 
 		Schema::table('jobs', function(Blueprint $table) {
-       $table->foreign('character_id')->references('id')->on('characters');
+       $table->foreign('character_id')
+						 ->references('id')->on('characters')
+						 ->onDelete('cascade')
+						 ->onUpdate('cascade');
     });
 
 	}

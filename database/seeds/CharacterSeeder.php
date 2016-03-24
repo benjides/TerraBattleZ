@@ -36,7 +36,6 @@ class CharacterSeeder extends Seeder {
           'pot'=>$faker->boolean(50),
           'pof'=>$faker->boolean(50),
           'adventurer'=>$faker->boolean(50),
-          'recode_id'=> NULL,
 				]
 			);
 			for ($t=1; $t < 4 ; $t++) {
