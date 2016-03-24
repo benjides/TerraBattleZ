@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin' , 'middleware' => 'auth'], function() {
     /*
     * Characters Routes
     */
-    Route::resource('class', 'ClassController');
+    Route::resource('classes', 'ClassController');
     Route::resource('races', 'RaceController');
 
     /*

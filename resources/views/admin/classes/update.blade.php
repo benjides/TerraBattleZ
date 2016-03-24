@@ -1,41 +1,41 @@
 @extends('layouts.admin')
 
-@section('title', 'Races - Create')
+@section('title', 'Classes - Update')
 
 @section('content')
 
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Races <small>Form Creation</small>
+            Classes <small>Update</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{url('admin')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="{{url('admin/races')}}">Races</a>
+                <a href="{{url('admin/classes')}}">Classes</a>
             </li>
             <li class="active">
-                 Create
+                 Update
             </li>
         </ol>
     </div>
 </div>
 
-<form class="form-horizontal" action="{{url('admin/races')}}" method="POST">
+<form class="form-horizontal" action="{{url('admin/classes',$class->id)}}" method="POST">
   <fieldset>
 
       <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+      <input type="hidden" name="_method" value="PUT">
 
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="contents">Name</label>
         <div class="col-md-5">
-          <input id="race" name="race" placeholder="Race" class="form-control input-md" required="" type="text" value="{{old('race')}}">
+          <input id="class" name="class" placeholder="Class" class="form-control input-md" required="" type="text" value="{{$class->class}}">
         </div>
       </div>
-
 
       <!-- Button -->
       <div class="form-group">
@@ -58,7 +58,7 @@
 
 @if (Session::has('success'))
 <div class="alert alert-success" role="alert">
-  The race <strong>{{Session::get('success')}}</strong> has been registered succesfully.
+  The class <strong>{{Session::get('success')}}</strong> has been updated succesfully.
 </div>
 @endif
 

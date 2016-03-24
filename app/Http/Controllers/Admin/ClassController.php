@@ -2,9 +2,13 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Character;
+use App\CharClass;
+use Auth;
 
 use Illuminate\Http\Request;
+
+use Validator;
+use Input;
 
 class ClassController extends Controller {
 
@@ -15,7 +19,8 @@ class ClassController extends Controller {
 	 */
 	public function index()
 	{
-		return view('characters');
+		$classes = CharClass::orderBy('order_key','desc')->get();
+		return view('admin.classes.list' , ['classes' => $classes ]);
 	}
 
 	/**
@@ -25,7 +30,7 @@ class ClassController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('admin.classes.create');
 	}
 
 	/**
@@ -35,7 +40,22 @@ class ClassController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$rules=array(
+			'class'=>'required|unique:char_classes',
+		);
+		$validator=Validator::make(Input::all(),$rules);
+		if ($validator->fails())
+		{
+			return redirect('admin/classes/create')
+			->withInput()
+			->withErrors($validator);
+		}
+		$max = CharClass::max('order_key') + 1;
+		CharClass::create([
+    	'class' => Input::get('class'),
+			'order_key' => $max
+    ]);
+		return redirect('admin/classes/create')->with('success',Input::get('class'));
 	}
 
 	/**
@@ -61,7 +81,8 @@ class ClassController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$class = CharClass::findorFail($id);
+		return view('admin.classes.update')->with('class',$class);
 	}
 
 	/**
@@ -72,7 +93,20 @@ class ClassController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$rules=array(
+			'class'=>'required|unique:char_classes',
+		);
+		$validator=Validator::make(Input::all(),$rules);
+		if ($validator->fails())
+		{
+			return redirect('admin/classes/'.$id.'/edit')
+			->withInput()
+			->withErrors($validator);
+		}
+		$class = CharClass::findorFail($id);
+		$class->class = Input::get('class');
+		$class->save();
+		return redirect('admin/classes/'.$id.'/edit')->with('success',Input::get('class'));
 	}
 
 	/**
@@ -83,7 +117,9 @@ class ClassController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$class = CharClass::findorFail($id);
+		$class->delete();
+		return redirect('admin/classes')->with('success', $class->class);
 	}
 
 }
