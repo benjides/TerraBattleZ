@@ -19,8 +19,8 @@
 
     <ol class="breadcrumb">
       <li><a href="{{url('/characters')}}">All Characters</a></li>
-      <li><a href="{{url('/class' , $character['class'])}}">{{$character['class']}}</a></li>
-      <li class="active">{{$character['name']}}</li>
+      <li><a href="{{url('/class' , $character->class)}}">{{$character->class}}</a></li>
+      <li class="active">{{$character->name}}</li>
     </ol>
 
     <div class="col-xs-12 base-info">
@@ -32,12 +32,12 @@
         <p>
           Class : {{$character->class}}
           <br>
-          Race :{{$character->race}}
+          Race : {{$character->race}}
         </p>
         <p>
-          Pact of Truth : {{$character->pot}}<?php //echo $pot == 1 ? "Yes" : "No"; ?>
+          Pact of Truth : {{$character->pot}}
           <br>
-          Pact of Fellowship : <?php //echo $pof == 1 ? "Yes" : "No"; ?>
+          Pact of Fellowship : {{$character->pof}}
         </p>
       </div>
     </div>
@@ -62,23 +62,25 @@
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>Stats</th><th>Lvl 1</th><th>Lvl 90</th>
+              <th>Stats</th>
+              <th>Lvl 1</th>
+              <th>Lvl 90</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>HP</td>
-              <td>{{$job['minHP']}}</td>
-              <td><strong>{{$job['maxHP']}}</strong></td>
+              <td>{{$job->minHP}}</td>
+              <td><strong>{{$job->maxHP}}</strong></td>
             </tr>
             <tr>
               <td>ATK</td>
-              <td>{{$job['minATK']}}</td>
-              <td><strong>{{$job['maxATK']}}</strong></td>
+              <td>{{$job->minATK}}</td>
+              <td><strong>{{$job->maxATK}}</strong></td>
             </tr>
             <tr>
               <td>DEF</td>
-              <td>{{$job['minDEF']}}</td>
+              <td>{{$job->minDEF}}</td>
               <td><strong>{{$job->maxDEF}}</strong></td>
             </tr>
             <tr>
@@ -97,7 +99,10 @@
         <table class="table table-striped table-bordered table-hover ">
           <thead>
             <tr>
-              <th>Level</th><th>Skill</th><th>Afection</th><th>Frequency</th>
+              <th>Level</th>
+              <th>Skill</th>
+              <th>Affection</th>
+              <th>Frequency</th>
             </tr>
           </thead>
           <tbody>
@@ -126,7 +131,7 @@
           <li>
             <img src="{{url($item->icon)}}" alt="{{$item->item_name}}" />
             <a href="{{url('items',$item->item_name)}}">{{$item->item_name}}</a>
-            X{{$item->quantity}}
+             X {{$item->quantity}}
           </li>
           @endforeach
           <li><img src="url('assets/icons/coins.png')" alt="Coins" /> {{$job->coins}} Coins</li>
@@ -135,24 +140,6 @@
       </div>
     @endforeach
     </div>
-    <h4>Profile :</h4>
-    <div class="col-xs-12 iteractions-wraper">
-      <ul class="nav nav-tabs" role="tablist">
-        <?php $i = 0 ?>
-        @foreach($character->iterations as $iteration)
-        <li <?php echo $i == 0 ? 'class="active"' : ''; $i++  ?>>
-          <a href="#{{$iteration->trigger}}" aria-controls="home" role="tab" data-toggle="tab">{{$iteration->trigger}}</a>
-        </li>
-        @endforeach
-      </ul>
-      <div class="tab-content">
-        <?php $i = 0 ?>
-        @foreach($character->iterations as $iteration)
-        <div role="tabpanel" class="tab-pane <?php echo $i == 0 ? ' active' : ''; $i++  ?>" id="{{$iteration->trigger}}">
-           {{$iteration->content}}
-        </div>
-        @endforeach
-      </div>
-    </div>
+
   </div>
 @endsection

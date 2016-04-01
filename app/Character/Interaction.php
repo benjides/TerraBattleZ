@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Iteration extends Model {
-	protected $table='iterations';
+class Interaction extends Model {
+	protected $table='interactions';
   protected $fillable = [
     'trigger',
 		'content',

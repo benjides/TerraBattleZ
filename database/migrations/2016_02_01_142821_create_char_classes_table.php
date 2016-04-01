@@ -15,7 +15,7 @@ class CreateCharClassesTable extends Migration {
 		Schema::create('char_classes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('order_key')->unsigned();
+			$table->integer('order_key')->unsigned()->unique();
 			$table->string('class',2)->unique();
 		});
 	}

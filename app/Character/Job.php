@@ -7,6 +7,7 @@ class Job extends Model {
 	protected $fillable = [
 		'number',
     'name',
+		'art',
 		'element',
 		'weapon',
 		'minHP',

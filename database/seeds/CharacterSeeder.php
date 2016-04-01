@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\Character;
-use App\Iteration;
+use App\Interaction;
 use App\Affection;
 use App\Race;
 use App\Job;
@@ -31,8 +31,10 @@ class CharacterSeeder extends Seeder {
 				[
 					'name'=>$name,
           'savename'=>$name,
-					'class'=>$faker->randomElement($array = array ('A','B','C','D','S','SS','Z')),
+					'icon' => 'icon.jpg',
+					'class'=> rand (1,7),
           'race'=> $race->race,
+					'gender' => $faker->randomElement($array = array ('Male','Female')),
           'pot'=>$faker->boolean(50),
           'pof'=>$faker->boolean(50),
           'adventurer'=>$faker->boolean(50),
@@ -43,6 +45,7 @@ class CharacterSeeder extends Seeder {
 					[
 						'name' => $faker->shuffle($faker->name()),
 	          'number' => $t,
+						'art' => 'job'.$t.'.jpg',
 	          'element' => $faker->randomElement($array = array ('None','Fire','Ice','Darkness','Lightning','Heal','Remedy')),
 	          'weapon' => $faker->randomElement($array = array ('Sword','Bow','Spear','Staff')),
 	          'minHP' => $faker->numberBetween(0, 130),
@@ -83,7 +86,7 @@ class CharacterSeeder extends Seeder {
 			}
 
 			for ($j=0; $j < rand(1,8) ; $j++) {
-				Iteration::create(
+				Interaction::create(
 				[
 					'trigger'=> $faker->word(),
 					'content'=> $faker->text(),

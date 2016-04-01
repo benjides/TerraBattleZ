@@ -31,7 +31,7 @@
                       </div>
                   </div>
               </div>
-              <a href="url('admin/characters')">
+              <a href="{{url('admin/characters')}}">
                   <div class="panel-footer">
                       <span class="pull-left">Overview</span>
                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -54,7 +54,7 @@
                       </div>
                   </div>
               </div>
-              <a href="url('admin/skills')">
+              <a href="{{url('admin/skills')}}">
                   <div class="panel-footer">
                       <span class="pull-left">Overview</span>
                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -77,7 +77,7 @@
                       </div>
                   </div>
               </div>
-              <a href="url('admin/items')">
+              <a href="{{url('admin/items')}}">
                   <div class="panel-footer">
                       <span class="pull-left">Overview</span>
                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -100,7 +100,7 @@
                       </div>
                   </div>
               </div>
-              <a href="url('admin/companions')">
+              <a href="{{url('admin/companions')}}">
                   <div class="panel-footer">
                       <span class="pull-left">Overview</span>
                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

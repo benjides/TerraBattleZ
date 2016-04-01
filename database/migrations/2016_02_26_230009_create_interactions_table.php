@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIterationsTable extends Migration {
+class CreateInteractionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateIterationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('iterations', function(Blueprint $table)
+		Schema::create('interactions', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('trigger');
@@ -22,7 +22,7 @@ class CreateIterationsTable extends Migration {
 			$table->timestamps();
 		});
 
-		Schema::table('iterations', function(Blueprint $table) {
+		Schema::table('interactions', function(Blueprint $table) {
 			$table->foreign('character_id')
 						->references('id')->on('characters')
 						->onDelete('cascade')

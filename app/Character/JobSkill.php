@@ -16,4 +16,8 @@ class JobSkill extends Model {
 	{
 		return $this->belongsTo('App/Job');
 	}
+	public function skill()
+	{
+		return $this->belongsTo('App/Skill');
+	}
 }

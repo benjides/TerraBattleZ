@@ -7,21 +7,32 @@ class Character extends Model {
   protected $fillable = [
     'name',
 		'savename',
+		'icon',
     'class',
     'race',
+		'gender',
     'pot',
     'pof',
     'adventurer'
   ];
-  protected $hidden = ['id','created_at','updated_at','recode_id'];
+  protected $hidden = ['id','savename','created_at','updated_at','recode_id'];
+	protected $casts = [
+		'pot' => 'boolean',
+		'pof' => 'boolean',
+		'adventurer' => 'boolean'
+	];
 
   public function jobs()
   {
     return $this->hasMany('App\Job');
   }
-	public function iterations()
+	public function interactions()
 	{
-		return $this->hasMany('App\Iteration');
+		return $this->hasMany('App\Interaction');
+	}
+	public function className()
+	{
+		return $this->hasOne('App\CharClass' , 'order_key','class');
 	}
 	public function recode()
 	{

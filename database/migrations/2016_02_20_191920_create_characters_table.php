@@ -17,11 +17,12 @@ class CreateCharactersTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->unique();
 			$table->string('savename')->unique();
-			$table->string('description');
-			$table->string('class',2);
+			$table->string('icon');
+			$table->integer('class')->unsigned();
 			$table->boolean('pot');
 			$table->boolean('pof');
 			$table->string('race');
+			$table->string('gender');
 			$table->boolean('adventurer');
 			$table->timestamps();
 		});
@@ -32,8 +33,7 @@ class CreateCharactersTable extends Migration {
 						->onDelete('cascade')
 						->onUpdate('cascade');
 			$table->foreign('class')
-						->references('class')
-						->on('char_classes')
+						->references('order_key')->on('char_classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
     });

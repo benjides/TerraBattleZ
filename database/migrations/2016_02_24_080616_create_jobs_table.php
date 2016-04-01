@@ -17,7 +17,8 @@ class CreateJobsTable extends Migration {
 			$table->increments('id');
 			$table->integer('character_id')->unsigned();
 			$table->integer('number')->unsigned();
-			$table->string('name')->unique();
+			$table->string('name');
+			$table->string('art');
 			$table->string('weapon');
 			$table->string('element');
 			$table->integer('minHP')->unsigned();

@@ -54,7 +54,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
+                <li class="dropdown pull-right">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         {{ ucfirst(Auth::user()->username) }}  <i class="fa fa-caret-down"></i>
                     </a>

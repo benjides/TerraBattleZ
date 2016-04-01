@@ -13,6 +13,6 @@ class CharClass extends Model {
 
 	public function characters()
   {
-    return $this->belongsToMany('App\Character');
+    return $this->hasMany('App\Character','class','order_key');
   }
 }
