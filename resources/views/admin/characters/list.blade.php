@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Characeters - List')
+@section('title', 'Characters - List')
 
 @section('css')
 <style media="screen">
-.table tbody>tr>td{
-  vertical-align: middle;
-}
+  .table tbody>tr>td{
+    vertical-align: middle;
+  }
 </style>
 @endsection
 @section('content')
@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Characters <small>Complete List</small>
+            Characters <small class="hidden-xs">Complete List</small>
             <a href="{{url('/admin/characters/create')}}" class="btn btn-default pull-right">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
             </a>

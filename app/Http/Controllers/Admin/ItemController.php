@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Input;
+use Illuminate\Support\Facades\File;
 
 class ItemController extends Controller {
 
@@ -40,11 +41,10 @@ class ItemController extends Controller {
 	 */
 	public function store()
 	{
-		return Input::all();
 		$rules=array(
 			'name'=>'required|unique:items',
 			'description'=>'required',
-			'icon'=>'required|mimes:jpeg,jpg,png',
+			'icon'=>'required|image',
 		);
 		$validator=Validator::make(Input::all(),$rules);
 		if ($validator->fails())
@@ -53,6 +53,16 @@ class ItemController extends Controller {
 			->withInput()
 			->withErrors($validator);
 		}
+		$icon = Input::file('icon');
+		$extension = $icon->getClientOriginalExtension();
+		$name = strtolower(str_replace(' ', '_', Input::get('name'))).'.'.$extension;
+		$icon->move( public_path().'/assets/content/items', $name);
+		Item::create([
+			'name' => Input::get('name'),
+			'description' => Input::get('description'),
+			'icon' => $name
+		]);
+		return redirect('admin/items/create')->with('success',Input::get('name'));
 	}
 
 	/**
@@ -86,7 +96,39 @@ class ItemController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$rules=array(
+			'name'=>'required',
+			'description'=>'required',
+		);
+		if (Input::hasFile('icon')) {
+			$rules['icon'] = 'required|image';
+		}
+		$validator=Validator::make(Input::all(),$rules);
+		if ($validator->fails())
+		{
+			return redirect('admin/items/'.$id.'/edit')
+				->withInput()
+				->withErrors($validator);
+		}
+		$item = Item::findorFail($id);
+		$item->name = Input::get('name');
+		$item->description = Input::get('description');
+		if (Input::hasFile('icon')) {
+			File::delete(public_path().'/assets/content/items/'.$item->icon);
+			$icon = Input::file('icon');
+			$extension = $icon->getClientOriginalExtension();
+			$name = strtolower(str_replace(' ', '_', Input::get('name'))).'.'.$extension;
+			$icon->move( public_path().'/assets/content/items', $name);
+			$item->icon = $name;
+		}else{
+			$array = explode('.', $item->icon);
+			$extension = end($array);
+			$name = strtolower(str_replace(' ', '_', Input::get('name'))).'.'.$extension;
+			File::move( public_path().'/assets/content/items/'.$item->icon, public_path().'/assets/content/items/'.$name );
+			$item->icon = $name;
+		}
+		$item->save();
+		return redirect('admin/items/'.$id.'/edit')->with('success',Input::get('name'));
 	}
 
 	/**

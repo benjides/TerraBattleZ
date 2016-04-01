@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Items - Create')
+@section('title', 'Items - Update')
 
 @section('css')
   <link href="{{ asset('/css/jasny-bootstrap.min.css')}}" rel="stylesheet">
@@ -8,7 +8,6 @@
 
 @section('js')
   <script src="{{ asset('/js/fileinput.js') }}"></script>
-  <script src="{{ asset('/js/holder.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -19,7 +18,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Items <small>Form Creation</small>
+            Items <small>Update</small>
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -29,22 +28,23 @@
                 <a href="{{url('admin/items')}}">Items</a>
             </li>
             <li class="active">
-                 Create
+                 Update
             </li>
         </ol>
     </div>
 </div>
 
-<form class="form-horizontal" action="{{url('admin/items')}}" method="POST" enctype="multipart/form-data">
+<form class="form-horizontal" action="{{url('admin/items',$item->id)}}" method="POST" enctype="multipart/form-data">
   <fieldset>
 
       <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+      <input type="hidden" name="_method" value="PUT">
 
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="contents">Item name</label>
         <div class="col-md-5">
-          <input id="name" name="name" placeholder="Item" class="form-control input-md" required="" type="text" value="{{old('name')}}">
+          <input id="name" name="name" placeholder="Item" class="form-control input-md" required="" type="text" value="{{$item->name}}">
         </div>
       </div>
 
@@ -52,7 +52,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="contents">Description</label>
         <div class="col-md-5">
-          <textarea id="description" name="description" placeholder="Description" class="form-control input-md" required="">{{old('description')}}</textarea>
+          <textarea id="description" name="description" placeholder="Description" class="form-control input-md" required="">{{$item->description}}</textarea>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
         <div class="col-md-5">
           <div class="fileinput fileinput-new" data-provides="fileinput" >
             <div class="fileinput-preview thumbnail" data-trigger="fileinput" >
-              <img data-src="holder.js/50x50">
+              <img src="{{asset('assets/content/items/'.$item->icon)}}">
             </div>
             <div>
               <span class="btn btn-default btn-file">
@@ -99,7 +99,7 @@
 
 @if (Session::has('success'))
 <div class="alert alert-success" role="alert">
-  The item <strong>{{Session::get('success')}}</strong> has been registered succesfully.
+  The item <strong>{{Session::get('success')}}</strong> has been updated succesfully.
 </div>
 @endif
 

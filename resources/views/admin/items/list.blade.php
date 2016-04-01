@@ -1,13 +1,17 @@
 @extends('layouts.admin')
 
 @section('title', 'Items - List')
-
+<style media="screen">
+  .table tbody>tr>td{
+    vertical-align: middle;
+  }
+</style>
 @section('content')
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Items <small>Complete List</small>
+            Items <small  class="hidden-xs">Complete List</small>
             <a href="{{url('/admin/items/create')}}" class="btn btn-default pull-right">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
             </a>
