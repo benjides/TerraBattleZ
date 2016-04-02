@@ -1,13 +1,19 @@
 @extends('layouts.admin')
 
 @section('title', 'Skills - List')
-
+@section('css')
+<style media="screen">
+  .table tbody>tr>td{
+    vertical-align: middle;
+  }
+</style>
+@endsection
 @section('content')
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Skills <small>Complete List</small>
+            Skills <small class="hidden-xs">Complete List</small>
             <a href="{{url('/admin/skills/create')}}" class="btn btn-default pull-right">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
             </a>
@@ -43,7 +49,7 @@
       @foreach ($skills as $skill)
         <tr>
           <td>
-            <img src="{{ $skill->icon }}" alt="{{ $skill->name }}" class="img-responsive" />
+            <img src="{{asset('assets/content/skills/'.$skill->icon)}}" alt="{{ $skill->name }}" class="img-responsive" />
           </td>
           <td>
             {{ $skill->name }}

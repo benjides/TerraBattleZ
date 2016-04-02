@@ -97,7 +97,7 @@ class ItemController extends Controller {
 	public function update($id)
 	{
 		$rules=array(
-			'name'=>'required',
+			'name'=>'required|unique:items,name,'.$id,
 			'description'=>'required',
 		);
 		if (Input::hasFile('icon')) {
@@ -139,6 +139,7 @@ class ItemController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		File::delete(public_path().'/assets/content/items/'.$item->icon);
 		$item = Item::findorFail($id);
 		$item->delete();
 		return redirect('admin/items')->with('success', $item->name);

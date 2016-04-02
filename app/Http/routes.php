@@ -27,16 +27,6 @@ Route::get('/characters', function () {
     }
     return view('rooster' , ['classes' => $classes]);
 });
-Route::get('/characters/{name}', function ($name) {
-    $character = App\Character::where('name','=',$name)->first();
-    $character->class = $character->className()->first()->class;
-		foreach ($character->jobs = $character->jobs()->orderBy('number','asc')->get() as $job) {
-			$job->skills = $job->skills()->orderBy('lvl','asc')->get();
-			$job->items = $job->items()->orderBy('quantity','asc')->get();
-		}
-    $character->interactions = $character->interactions()->get();
-    return view('character' , ['character' => $character]);
-});
 
 /*
   Admin Routes

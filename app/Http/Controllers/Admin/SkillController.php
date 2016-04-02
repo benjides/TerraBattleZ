@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use Validator;
 use Input;
+use Illuminate\Support\Facades\File;
 
 class SkillController extends Controller {
 
@@ -40,7 +41,36 @@ class SkillController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$rules=array(
+			'name'=>'required|unique:skills',
+			'description'=>'required',
+		);
+		if (Input::hasFile('icon')) {
+			$rules['icon'] = 'required|image';
+		}
+		$validator=Validator::make(Input::all(),$rules);
+		if ($validator->fails())
+		{
+			return redirect('admin/skills/create')
+			->withInput()
+			->withErrors($validator);
+		}
+
+		$skill = new Skill();
+		$skill->name = Input::get('name');
+		$skill->description = Input::get('description');
+		if (Input::hasFile('icon')) {
+			$icon = Input::file('icon');
+			$extension = $icon->getClientOriginalExtension();
+			$name = strtolower(str_replace(' ', '_', Input::get('name'))).'.'.$extension;
+			$icon->move( public_path().'/assets/content/skills', $name);
+			$skill->icon = $name;
+		}
+		else{
+			$skill->icon = Input::get('skill');
+		}
+		$skill->save();
+		return redirect('admin/skills/create')->with('success',Input::get('name'));
 	}
 
 	/**
@@ -74,7 +104,42 @@ class SkillController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$rules=array(
+			'name' => 'required|unique:skills,name,'.$id,
+			'description'=>'required',
+		);
+		if (Input::hasFile('icon')) {
+			$rules['icon'] = 'required|image';
+		}
+		$validator=Validator::make(Input::all(),$rules);
+		if ($validator->fails())
+		{
+			return redirect('admin/skills/'.$id.'/edit')
+				->withInput()
+				->withErrors($validator);
+		}
+		$skill = Skill::findorFail($id);
+		$skill->name = Input::get('name');
+		$skill->description = Input::get('description');
+		if (Input::hasFile('icon'))
+		{
+			$count = Skill::where('icon','=',$skill->icon)->count();
+			if ($count == 1) {
+				File::delete(public_path().'/assets/content/skills/'.$skill->icon);
+			}
+			$icon = Input::file('icon');
+			$extension = $icon->getClientOriginalExtension();
+			$name = strtolower(str_replace(' ', '_', Input::get('name'))).'.'.$extension;
+			$icon->move( public_path().'/assets/content/skills', $name);
+			$skill->icon = $name;
+		}
+		else
+		{
+			$skill->icon = Input::get('skill');
+		}
+
+		$skill->save();
+		return redirect('admin/skills/'.$id.'/edit')->with('success',Input::get('name'));
 	}
 
 	/**
@@ -87,6 +152,10 @@ class SkillController extends Controller {
 	{
 		$skill = Skill::findorFail($id);
 		$skill->delete();
+		$count = Skill::where('icon','=',$skill->icon)->count();
+		if($count == 0) {
+			File::delete(public_path().'/assets/content/skills/'.$skill->icon);
+		}
 		return redirect('admin/skills')->with('success', $skill->name);
 	}
 

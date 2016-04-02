@@ -42,11 +42,11 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="radios">Update date :</label>
         <div class="col-md-4">
-          <label class="radio-inline" for="radios-0">
+          <label class="radio-inline">
             <input name="date" value="yes" type="radio">
             Yes
           </label>
-          <label class="radio-inline" for="radios-1">
+          <label class="radio-inline">
             <input name="date" value="no" type="radio" checked="checked">
             No
           </label>

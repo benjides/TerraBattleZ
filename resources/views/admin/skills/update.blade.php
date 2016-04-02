@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Skill - Create')
+@section('title', 'Skill - Update')
 @section('css')
 <link href="{{ asset('/css/jasny-bootstrap.min.css')}}" rel="stylesheet">
 <style media="screen">
@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Skills <small>Form Creation</small>
+            Skills <small>Update</small>
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -42,22 +42,23 @@
                 <a href="{{url('admin/skills')}}">Items</a>
             </li>
             <li class="active">
-                 Create
+                 Update
             </li>
         </ol>
     </div>
 </div>
 
-<form class="form-horizontal" action="{{url('admin/skills')}}" method="POST" enctype="multipart/form-data">
+<form class="form-horizontal" action="{{url('admin/skills',$skill->id)}}" method="POST" enctype="multipart/form-data">
   <fieldset>
 
       <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+      <input type="hidden" name="_method" value="PUT">
 
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="contents">Skill name</label>
         <div class="col-md-5">
-          <input id="name" name="name" placeholder="Skill" class="form-control input-md" required="" type="text" value="{{old('name')}}">
+          <input id="name" name="name" placeholder="Skill" class="form-control input-md" required="" type="text" value="{{old('name' , $skill->name)}}">
         </div>
       </div>
 
@@ -65,7 +66,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="contents">Description</label>
         <div class="col-md-5">
-          <textarea id="description" name="description" placeholder="Description" class="form-control input-md" required="">{{old('description')}}</textarea>
+          <textarea id="description" name="description" placeholder="Description" class="form-control input-md" required="">{{old('description' , $skill->description)}}</textarea>
         </div>
       </div>
 
@@ -79,13 +80,13 @@
               Select from existing one:
             </label>
             <div class="wraper" id="selectorWraper">
-              <input type="hidden" name="skill" value="" id="inputSkill">
+              <input type="hidden" name="skill" value="{{$skill->icon}}" id="inputSkill">
               <div class="panel panel-default" id="selector">
                 <div class="panel-body">
                   @foreach (App\Skill::distinct()->select('icon')->get() as $skill)
                     <div class="col-xs-3">
                       <a href="#" class="thumbnail skillselector" data-skill="{{$skill->icon}}">
-                        <img src="{{$skill->icon}}" alt="{{$skill->name}}">
+                        <img src="{{asset('assets/content/skills/'.$skill->icon)}}" alt="{{$skill->name}}">
                       </a>
                     </div>
                   @endforeach
@@ -101,7 +102,7 @@
             </label>
             <div class="wraper fileinput fileinput-new col-xs-12" data-provides="fileinput" >
               <div class="fileinput-preview thumbnail" data-trigger="fileinput" >
-                <img data-src="holder.js/50x50">
+                <img src="{{asset('assets/content/skills/'.$skill->icon)}}">
               </div>
               <div>
                 <span class="btn btn-default btn-file">
@@ -144,7 +145,7 @@
 
 @if (Session::has('success'))
 <div class="alert alert-success" role="alert">
-  The skill <strong>{{Session::get('success')}}</strong> has been registered succesfully.
+  The skill <strong>{{Session::get('success')}}</strong> has been updated succesfully.
 </div>
 @endif
 

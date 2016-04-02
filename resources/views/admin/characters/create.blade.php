@@ -110,7 +110,7 @@
       <div class="row">
 
           <div class="col-md-2">
-            <div class="fileinput fileinput-new" data-provides="fileinput" style="width: 100%; min-height:100px;">
+            <div class="fileinput fileinput-new" data-provides="fileinput" style="min-height:100px;">
               <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 100%; min-height:100px;">
                 <img data-src="holder.js/100x100">
               </div>

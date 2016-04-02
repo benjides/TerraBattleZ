@@ -13,6 +13,10 @@ class Skill extends Model {
 
 	public function characters()
   {
-    return $this->hasManyThrough('App\Character', 'App\JobSkill');
+    return $this->hasManyThrough('App\Character', 'App\JobSkill' ,'skill_name');
   }
+	public function jobs()
+	{
+		return $this->hasMany('App\JobSkill','skill_name','name');
+	}
 }
